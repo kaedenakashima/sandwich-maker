@@ -1,0 +1,43 @@
+.BreadBottom > img,
+.BreadTop >img,
+.Salad > img,
+.Cheese > img {
+ width: 100%;
+}
+
+.BreadBottom {
+  z-index: -1;
+  position: relative;
+}
+
+.BreadTop {
+  height: 26px;
+  z-index: 6;
+  position: relative;
+}
+
+.Tomato{
+  height: 18px;
+  z-index: 4;
+  position: relative;
+  top: 40px;
+}
+
+.Cheese {
+  height: 30px;
+  z-index: 3;
+  position: relative;
+}
+.Salad {
+  height: 30px;
+  z-index: 2;
+  position: relative;
+} 
+
+.Salami {
+  width: 80%;
+  height: 20px;
+  z-index: 1;
+  position: relative;
+}
+
