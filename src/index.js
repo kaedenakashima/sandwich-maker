@@ -7,12 +7,17 @@ import thunk from 'redux-thunk'
 
 import './index.css';
 import App from './App';
-import sandwichBuilder from './store/reducers/sandwichBuilder'
+import sandwichBuilderReducer from './store/reducers/sandwichBuilder'
 import orderReducer from './store/reducers/order'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(sandwichBuilder, composeEnhancers(
+const rootReducer = combineReducers({
+    sandwichBuilder: sandwichBuilderReducer,
+    order: orderReducer
+})
+
+const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
 
