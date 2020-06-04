@@ -8,7 +8,7 @@ import OrderSummary from '../../components/Sandwich/OrderSummary/OrderSummary'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import * as actionTypes from '../../store/actions/actionTypes'
-import * as sandwichBuilderActions from '../../store/actions'
+import * as actions from '../../store/actions'
 import axios from '../../axios-orders'
 
 class SandwichBuilder extends Component {
@@ -41,6 +41,7 @@ class SandwichBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
+        this.props.onInitPurchase();
         this.props.history.push('/checkout')
     }
 
@@ -100,9 +101,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded: (ingName) => dispatch(sandwichBuilderActions.addIngredient(ingName)),
-        onIngredientRemoved: (ingName) => dispatch(sandwichBuilderActions.removeIngredient(ingName)),
-        onInitIngredients: () => dispatch(sandwichBuilderActions.initIngredients())
+        onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
+        onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName)),
+        onInitIngredients: () => dispatch(actions.initIngredients()),
+        onInitPurchase: () => dispatch(actions.purchaseInit())
     }
 }
 
