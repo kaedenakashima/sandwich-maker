@@ -6,7 +6,9 @@ const NavigationItems = (props) => (
     <ul className='NavigationItems'>
         <NavigationItem link='/' exact>Sandwich Builder</NavigationItem>
         <NavigationItem link='/orders'>Orders</NavigationItem>
-        <NavigationItem link='/auth'>Authenticate</NavigationItem>
+        {!props.isAuthenticated
+            ? <NavigationItem link='/auth'>Authenticate</NavigationItem>
+            : <NavigationItem link='/logout'>Logout</NavigationItem>}
     </ul>
 );
 export default NavigationItems;

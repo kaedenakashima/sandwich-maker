@@ -11,7 +11,6 @@ import * as actions from '../../../store/actions'
 class ContactData extends Component {
     state = {
         orderForm: {
-            // controls: [],
             name: {
                 elementType: 'input',
                 elementConfig: {
@@ -115,7 +114,7 @@ class ContactData extends Component {
             price: this.props.price,
             orderData: formData
         }
-        this.props.onOrderSandwich(order);
+        this.props.onOrderSandwich(order, this.props.token);
     }
 
     checkValidity(value, rules) {
@@ -201,13 +200,14 @@ const mapStateToProps = state => {
     return {
         ings: state.sandwichBuilder.ingredients,
         price: state.sandwichBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrderSandwich: (orderData) => dispatch(actions.purchaseSandwich(orderData))
+        onOrderSandwich: (orderData, token) => dispatch(actions.purchaseSandwich(orderData, token))
     }
 }
 

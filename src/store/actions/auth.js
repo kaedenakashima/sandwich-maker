@@ -22,6 +22,20 @@ export const authFail = (error) => {
     }
 }
 
+export const logout = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
+
+export const checkAuthTimeout = (expirationTime) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(logout());
+        }, expirationTime * 1000)
+    }
+}
+
 export const auth = (email, password, isSignup) => {
     return dispatch => {
         dispatch(authStart());
@@ -30,7 +44,7 @@ export const auth = (email, password, isSignup) => {
             password: password,
             returnSecureToken: true
         }
-        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE';
+        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/setAccountInfo?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE';
         if (!isSignup) {
             url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE'
         }
@@ -38,6 +52,7 @@ export const auth = (email, password, isSignup) => {
             .then(response => {
                 console.log(response);
                 dispatch(authSuccess(response.data.idToken, response.data.localId))
+                dispatch(checkAuthTimeout(response.data.expiresIn))
             })
             .catch(err => {
                 dispatch(authFail(err.response.data.error));
@@ -45,6 +60,18 @@ export const auth = (email, password, isSignup) => {
 
         // let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE';
         // if (isSignup) url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE';
+        // axios.post(url, authData)
+        //     .then(response => {
+        //         console.log(response);
+        //         dispatch(authSuccess(response.data))
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //         dispatch(authFail(err));
+        //     })
+
+        // let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signupNewUser?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE';
+        // if (isSignup) url = 'https://identitytoolkit.googleapis.com/v1/accounts:verifyPassword?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE';
         // axios.post(url, authData)
         //     .then(response => {
         //         console.log(response);
