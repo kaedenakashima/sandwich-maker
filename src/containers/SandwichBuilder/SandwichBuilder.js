@@ -33,7 +33,7 @@ class SandwichBuilder extends Component {
     }
 
     purchaseHandler = () => {
-        if (this.props.inAuthenticated) {
+        if (this.props.isAuthenticated) {
             this.setState({ purchasing: true });
         } else {
             this.props.onSetAuthRedirectPath('/checkout');
