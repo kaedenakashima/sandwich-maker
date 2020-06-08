@@ -21,12 +21,16 @@
 }
 
 .Success {
-    color: #5C9210;
+    font-weight: bold;
+    color: #000;
     border: none;
-    background: white;
+    background: #4CAF50;
     font-weight: bold;
     font-size: 1em;
-    padding: 1em;
+    height: 2em;
+    border-radius: 30px;
+    width: 100px;
+    padding: 0!important;
 }
 
 .Danger {
@@ -38,3 +42,13 @@
     padding: 1em;
 }
 
+.Switch{
+    color: #009688;
+    border: none;
+    background: #FFEB3B;
+    font-weight: bold;
+    font-size: .7em;
+    padding: 0 .5em !important;
+    border-radius: 9px;
+    width: 150px;
+}

@@ -7,7 +7,7 @@ import Modal from '../../components/UI/Modal/Modal'
 import OrderSummary from '../../components/Sandwich/OrderSummary/OrderSummary'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
-import * as actionTypes from '../../store/actions/actionTypes'
+// import * as actionTypes from '../../store/actions/actionTypes'
 import * as actions from '../../store/actions'
 import axios from '../../axios-orders'
 
@@ -17,7 +17,6 @@ class SandwichBuilder extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
         this.props.onInitIngredients();
     }
 
