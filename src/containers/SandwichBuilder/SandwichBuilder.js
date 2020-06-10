@@ -11,7 +11,7 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import * as actions from '../../store/actions'
 import axios from '../../axios-orders'
 
-class SandwichBuilder extends Component {
+export class SandwichBuilder extends Component {
     state = {
         purchasing: false
     }
