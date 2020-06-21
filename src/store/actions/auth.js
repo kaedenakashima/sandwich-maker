@@ -1,5 +1,5 @@
-import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import * as actionTypes from './actionTypes'
 
 export const authStart = () => {
     return {
@@ -14,7 +14,6 @@ export const authSuccess = (token, userId) => {
         userId: userId
     }
 }
-
 export const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
@@ -23,11 +22,11 @@ export const authFail = (error) => {
 }
 
 export const logout = () => {
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('expirationDate');
-    // localStorage.removeItem('userId');
+    localStorage.removeItem('token');
+    localStorage.removeItem('expirationDate');
+    localStorage.removeItem('userId');
     return {
-        type: actionTypes.AUTH_INITIATE_LOGOUT
+        type: actionTypes.AUTH_LOGOUT
     }
 }
 
@@ -59,7 +58,6 @@ export const auth = (email, password, isSignup) => {
         }
         axios.post(url, authData)
             .then(response => {
-                console.log(response);
                 const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('expirationDate', expirationDate);
@@ -70,31 +68,6 @@ export const auth = (email, password, isSignup) => {
             .catch(err => {
                 dispatch(authFail(err.response.data.error));
             })
-
-        // let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE';
-        // if (isSignup) url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE';
-        // axios.post(url, authData)
-        //     .then(response => {
-        //         console.log(response);
-        //         dispatch(authSuccess(response.data))
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //         dispatch(authFail(err));
-        //     })
-
-        // let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signupNewUser?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE';
-        // if (isSignup) url = 'https://identitytoolkit.googleapis.com/v1/accounts:verifyPassword?key=AIzaSyBQ6LkSZkzVdZS1UyQ0i-Gi7rNff2Lj8UE';
-        // axios.post(url, authData)
-        //     .then(response => {
-        //         console.log(response);
-        //         dispatch(authSuccess(response.data))
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //         dispatch(authFail(err));
-        //     })
-
     }
 }
 
