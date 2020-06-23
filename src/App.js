@@ -19,15 +19,16 @@ const Auth = React.lazy(() => {
   return import('./containers/Auth/Auth');
 });
 
-const App = (props) => {
-  const { onAutoSignup } = props;
+const App = props => {
+  const { onTryAutoSignup } = props;
+
   useEffect(() => {
-    props.onAutoSignup();
-  }, [onAutoSignup]);
+    onTryAutoSignup();
+  }, [onTryAutoSignup]);
 
   let routes = (
     <Switch>
-      <Route path='/auth' render={() => <Auth />} />
+      <Route path='/auth' render={props => <Auth {...props} />} />
       <Route path='/' exact component={SandwichBuilder} />
       <Redirect to="/" />
     </Switch>
@@ -35,10 +36,10 @@ const App = (props) => {
   if (props.isAuthenticated) {
     routes = (
       <Switch>
-        <Route path='/checkout' render={() => <Checkout />} />
-        <Route path='/orders' render={() => <Orders />} />
+        <Route path='/checkout' render={props => <Checkout {...props} />} />
+        <Route path='/orders' render={props => <Orders />} {...props} />
         <Route path='/logout' component={Logout} />
-        <Route path='/auth' render={() => <Auth />} />
+        <Route path='/auth' render={props => <Auth />} {...props} />
         <Route path='/' exact component={SandwichBuilder} />
         <Redirect to="/" />
       </Switch>
@@ -62,7 +63,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAutoSignup: () => dispatch(actions.authCheckState())
+    onTryAutoSignup: () => dispatch(actions.authCheckState())
   }
 }
 

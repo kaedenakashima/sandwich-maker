@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import './SandwichIngredient.css'
 import bread_top from './img/bread_top.png'
@@ -15,36 +15,34 @@ import lettuce from './img/lettuce.png'
 // import onion from './img/onion.png'
 
 
-class SandwichIngredient extends Component {
-    render() {
-        let ingredient = null;
+const SandwichIngredient = props => {
+    let ingredient = null;
 
-        switch (this.props.type) {
-            case 'bread-bottom':
-                ingredient = <div className='BreadBottom'><img src={bread_bottom} alt='bread_bottom' /></div>;
-                break;
-            case 'bread-top':
-                ingredient = (
-                    <div className='BreadTop'><img src={bread_top} alt='bread_top' /></div>
-                );
-                break;
-            case 'atomato':
-                ingredient = <div className='Tomato'><img src={tomato} alt='tomato' /></div>;
-                break;
-            case 'cheese':
-                ingredient = <div className='Cheese'><img src={cheese} alt='cheese' /></div>;
-                break;
-            case 'salad':
-                ingredient = <div className='Salad'><img src={lettuce} alt='lettuce' /></div>;
-                break;
-            case 'salami':
-                ingredient = <div className='Salami'><img src={salami} alt='salami' /></div>;
-                break;
-            default:
-                ingredient = null;
-        }
-        return ingredient;
+    switch (props.type) {
+        case 'bread-bottom':
+            ingredient = <div className='BreadBottom'><img src={bread_bottom} alt='bread_bottom' /></div>;
+            break;
+        case 'bread-top':
+            ingredient = (
+                <div className='BreadTop'><img src={bread_top} alt='bread_top' /></div>
+            );
+            break;
+        case 'atomato':
+            ingredient = <div className='Tomato'><img src={tomato} alt='tomato' /></div>;
+            break;
+        case 'cheese':
+            ingredient = <div className='Cheese'><img src={cheese} alt='cheese' /></div>;
+            break;
+        case 'salad':
+            ingredient = <div className='Salad'><img src={lettuce} alt='lettuce' /></div>;
+            break;
+        case 'salami':
+            ingredient = <div className='Salami'><img src={salami} alt='salami' /></div>;
+            break;
+        default:
+            ingredient = null;
     }
+    return ingredient;
 }
 
 SandwichIngredient.propTypes = {
